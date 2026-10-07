@@ -61,18 +61,16 @@ jobs:
           # 1. 解压根目录的 Archive.zip
           unzip Archive.zip -d temp_icons
 
-          # 2. 删除旧的 appiconset 图标目录
+          # 2. 删除旧的 appiconset 和 icon 目录
           rm -rf ios/Runner/Assets.xcassets/AppIcon.appiconset
-
-          # 3. 复制你的新图标进去
-          cp -R temp_icons/AppIcon.appiconset ios/Runner/Assets.xcassets/
-
-          # 4. 关键！删除原有的 AppIcon.icon 文件夹，强制让 Xcode 使用新的 appiconset
           rm -rf ios/Runner/AppIcon.icon
 
-          # 5. 验证并打印
+          # 3. 复制你的新 .icon 图标进去
+          cp -R temp_icons/AppIcon.icon ios/Runner/AppIcon.icon
+
+          # 4. 验证并打印
           echo "✅ 图标替换完成！"
-          ls ios/Runner/Assets.xcassets/AppIcon.appiconset/
+          ls -R ios/Runner/AppIcon.icon/
       # ===================================================
 
       - name: Build iOS standard (no codesign, 无 3D 封面)
